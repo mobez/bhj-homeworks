@@ -9,7 +9,7 @@ const TimerId = setInterval(() =>{
 	if (!cnt){
 		clearInterval(TimerId);
 		alert("Вы победили в конкурсе");
-		const link = document.createElement('a');
+		// const link = document.createElement('a');
 		// if (typeof link.download === 'undefined'){
 		// 	location.assign("https://mobimg.b-cdn.net/v3/fetch/54/54bb741fd881313da79ec7d7f648fe9d.jpeg");
 		// }else{
