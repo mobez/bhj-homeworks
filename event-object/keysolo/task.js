@@ -8,6 +8,7 @@ class Game {
     this.reset();
 
     this.registerEvents();
+
   }
 
   reset() {
@@ -24,6 +25,13 @@ class Game {
       В случае правильного ввода слова вызываем this.success()
       При неправильном вводе символа - this.fail();
      */
+     if (event){
+      if (this.currentSymbol.textContent.toLowerCase() == event.key.toLowerCase()) this.success();
+      else this.fail();
+     }
+  }
+  handleEvent(event) {
+    this.registerEvents();
   }
 
   success() {
@@ -86,5 +94,8 @@ class Game {
   }
 }
 
-new Game(document.getElementById('game'))
+
+const game = new Game(document.getElementById('game'));
+
+document.addEventListener("keyup", game);
 
