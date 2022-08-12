@@ -34,7 +34,7 @@ colors.forEach((color)=>{
 		if (color_act){
 			color_act.classList.remove("color_active");
 			if (color_act.dataset.textColor){
-				book.classList.remove(`book_color-${color_act.text.datasetColor}`);
+				book.classList.remove(`book_color-${color_act.dataset.textColor}`);
 			}
 		}
 		this.classList.add("color_active");
