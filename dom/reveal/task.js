@@ -3,7 +3,7 @@ let reveal_act;
 window.addEventListener('scroll', function() {
   reveals.forEach((reveal) => {
     const {top, bottom} = reveal.getBoundingClientRect();
-    if ((top >= 0)&&(bottom <= window.innerHeight)){
+    if (((top >= 0)&&(top <= window.innerHeight))||((bottom >= 0)&&(bottom <= window.innerHeight))){
       reveal.classList.add("reveal_active");
       reveal_act = reveal;
     }else{
