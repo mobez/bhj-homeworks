@@ -29,14 +29,18 @@ a_links.forEach((a)=>{
 		tool_tips_acts.forEach((tool)=>{
 			tool.classList.remove("tooltip_active");
 		});
-		const position = div.dataset.position;
+		let position = div.dataset.position;
 		div.removeAttribute("style");
 		div.classList.add("tooltip_active");
 		const div_conf = div.getBoundingClientRect();
+		if ((position == "left")&&(left < div_conf.width)) position = "right";
+		else if ((position == "right")&&((right+div_conf.width) > window.innerWidth)) position ="left";
+		else if ((position == "top")&&(top < div_conf.height)) position ="bottom";
+		else if ((position == "bottom")&&(window.innerHeight - bottom < div_conf.height)) position ="top";
 		switch(position){
 			case "top":
 				div.style.left = left+"px";
-				div.style.top = (top-div_conf.height)+"px";
+				div.style.bottom = (window.innerHeight - top) +"px";
 			break;
 			case "left":
 				div.style.left = (left-div_conf.width)+"px";
