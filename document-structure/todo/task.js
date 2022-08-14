@@ -1,58 +1,61 @@
-const btn_add = document.getElementById("tasks__add");
-const task_list = document.getElementById("tasks__list");
-const inp_txt = document.getElementById("task__input");
+const btnAdd = document.getElementById("tasks__add");
+const taskList = document.getElementById("tasks__list");
+const inpTxt = document.getElementById("task__input");
 const form = document.getElementById("tasks__form");
 const myStorage = window.localStorage;
 let tasks = [];
 
-function ce(t) {
+function create(t) {
   return document.createElement(t);
 };
-function ac(a, b) {
+function append(a, b) {
   a.appendChild(b);
 };
 
 function add_task_HTML(text){
-	const task = ce("div");
-	const title = ce("div");
-	const remove = ce("a");
+	const task = create("div");
+	const title = create("div");
+	const remove = create("a");
 	task.classList.add("task");
 	title.classList.add("task__title");
 	title.innerHTML = text;
 	remove.classList.add("task__remove");
 	remove.href = "#";
 	remove.innerHTML = "&times;";
-	ac(task, title);
-	ac(task, remove);
-	ac(task_list, task);
+	append(task, title);
+	append(task, remove);
+	append(taskList, task);
 	remove.addEventListener("click",(e)=>{
 		e.preventDefault();
 		task.remove();
-		const task_list_value = document.querySelectorAll(".task__title");
+		const taskListValue = document.querySelectorAll(".task__title");
 		tasks.length = 0;
-		task_list_value.forEach((task_val)=>{
-			tasks.push(task_val.innerHTML);
+		taskListValue.forEach((taskVal)=>{
+			tasks.push(taskVal.innerHTML);
 		});
-		myStorage.setItem("tasks", tasks);
+		myStorage.setItem("tasks", JSON.stringify(tasks));
 	});
 }
 
 function task_add(){
-	if (inp_txt.value.length){
-		add_task_HTML(inp_txt.value);
-		tasks.push(inp_txt.value);
-		myStorage.setItem("tasks", tasks);
+	if (inpTxt.value.trim().length){
+		add_task_HTML(inpTxt.value.trim());
+		tasks.push(inpTxt.value);
+		myStorage.setItem("tasks", JSON.stringify(tasks));
 	}
+	inpTxt.value = "";
 }
 
-tasks = myStorage.getItem("tasks").split(",");
-if (tasks) tasks.forEach((value)=>{
-	add_task_HTML(value);
-});
-else tasks = [];
+const values = myStorage.getItem("tasks");
+if (values){
+	tasks = JSON.parse(values);
+	tasks.forEach((value)=>{
+		add_task_HTML(value);
+	});
+}
 
 
-btn_add.addEventListener("click", (e)=>{
+btnAdd.addEventListener("click", (e)=>{
 	e.preventDefault();
 	task_add();
 });
