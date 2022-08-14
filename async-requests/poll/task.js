@@ -22,7 +22,6 @@ function sendResult(id, idAnswer){
 			json.stat.forEach((stat)=>{
 				summ += stat.votes;
 			});
-			console.log(summ)
 			json.stat.forEach((stat)=>{
 				title.innerHTML += `<br>${stat.answer} <b>${((stat.votes/summ)*100).toFixed(2)}%</b>`
 			});
