@@ -25,7 +25,7 @@ function add_value(json){
 		value.classList.add("item__value");
 		value.textContent = json.response.Valute[key].Value;
 		currency.classList.add("item__currency");
-		currency.textContent = json.response.Valute[key].Name;
+		currency.textContent = "руб.";
 		append(item, code);
 		append(item, value);
 		append(item, currency);
@@ -44,8 +44,7 @@ if (values){
 const xhr = new XMLHttpRequest();
 xhr.addEventListener("readystatechange", ()=>{
 	if(xhr.readyState === xhr.DONE){
-		const json = JSON.parse(xhr.responseText);
-		add_value(json);
+		add_value(JSON.parse(xhr.responseText));
 	}
 });
 xhr.open("GET","https://netology-slow-rest.herokuapp.com");
