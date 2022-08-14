@@ -8,7 +8,7 @@ function create(t) {
 function append(a, b) {
   a.appendChild(b);
 };
-function add_value(json){
+function addValue(json){
 	const loader = document.getElementById("loader");
 	while (items.hasChildNodes()) {
 	  items.removeChild(items.lastChild);
@@ -37,14 +37,14 @@ function add_value(json){
 
 const values = myStorage.getItem("currencys");
 if (values){
-	add_value(JSON.parse(values));
+	addValue(JSON.parse(values));
 }
 
 
 const xhr = new XMLHttpRequest();
 xhr.addEventListener("readystatechange", ()=>{
 	if(xhr.readyState === xhr.DONE){
-		add_value(JSON.parse(xhr.responseText));
+		addValue(JSON.parse(xhr.responseText));
 	}
 });
 xhr.open("GET","https://netology-slow-rest.herokuapp.com");
