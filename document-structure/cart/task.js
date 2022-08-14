@@ -1,33 +1,34 @@
 const order = document.querySelector(".cart__products");
 const products = document.querySelectorAll(".product");
 
-let card_to_id=[];
+let cardToId=[];
 
-function ce(t) {
+function create(t) {
   return document.createElement(t);
 };
-function ac(a, b) {
+function append(a, b) {
   a.appendChild(b);
 };
 
 function add_cards(id, cnt, img){
-	if (card_to_id[id] == undefined){
-		const card = ce("div");
-		const card_img = ce("img");
-		const card_cnt = ce("div");
+	if (cardToId[id] == undefined){
+		const card = create("div");
+		const cardImg = create("img");
+		const cardCnt = create("div");
 		card.classList.add("cart__product");
 		card.dataset.id = id;
-		card_img.classList.add("cart__product-image");
-		card_img.src = img;
-		card_cnt.innerHTML = cnt;
-		card_to_id[id] = {cnt, card_cnt};
-		ac(card, card_img);
-		ac(card, card_cnt);
-		ac(order, card);
+		cardImg.classList.add("cart__product-image");
+		cardImg.src = img;
+		cardCnt.classList.add("cart__product-count");
+		cardCnt.innerHTML = cnt;
+		cardToId[id] = {cnt, cardCnt};
+		append(card, cardImg);
+		append(card, cardCnt);
+		append(order, card);
 	}else{
-		let card_cnt = parseInt(card_to_id[id].card_cnt.innerHTML);
-		card_cnt += cnt;
-		card_to_id[id].card_cnt.innerHTML = card_cnt;
+		let cardCnt = parseInt(cardToId[id].cardCnt.innerHTML);
+		cardCnt += cnt;
+		cardToId[id].cardCnt.innerHTML = cardCnt;
 	}
 }
 
